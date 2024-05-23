@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\PokemonRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: PokemonRepository::class)]
 class Pokemon
@@ -21,7 +22,10 @@ class Pokemon
     private ?string $full_id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $img = null;
+    private ?string $img_small = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $img_large = null;
 
     #[ORM\Column(length: 255)]
     private ?string $types = null;
@@ -64,14 +68,26 @@ class Pokemon
         return $this;
     }
 
-    public function getImg(): ?string
+    public function getImgSmall(): ?string
     {
-        return $this->img;
+        return $this->img_small;
     }
 
-    public function setImg(string $img): static
+    public function setImgSmall(string $img_small): static
     {
-        $this->img = $img;
+        $this->img_small = $img_small;
+
+        return $this;
+    }
+
+    public function getImgLarge(): ?string
+    {
+        return $this->img_large;
+    }
+
+    public function setImgLarge(string $img_large): static
+    {
+        $this->img_large = $img_large;
 
         return $this;
     }

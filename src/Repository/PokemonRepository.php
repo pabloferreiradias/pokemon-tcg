@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Pokemon;
+use App\Service\PokemonApi;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -16,13 +17,10 @@ class PokemonRepository extends ServiceEntityRepository
         parent::__construct($registry, Pokemon::class);
     }
 
-    public function findByIdAPI($id): ?Pokemon
+    public function findByIdAPI($id)
     {
-        $pokemon = new Pokemon();
-        $pokemon->setFullId('pikachu');
-        $pokemon->setName('pikachu');
-        $pokemon->setImg('pikachu');
-        $pokemon->setTypes('pikachu');
+        $pokemonApi = new PokemonApi();
+        $pokemon = $pokemonApi->getPokemonByFullId($id);
 
         return $pokemon;
     }
