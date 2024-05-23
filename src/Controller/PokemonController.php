@@ -25,14 +25,18 @@ class PokemonController extends AbstractController
 
         $this->serializer = new Serializer($normalizers, $encoders);
     }
-    
-    #[Route('/pokemon', name: 'pokemon_search')]
-    public function index(): JsonResponse
+
+    #[Route('/pokemon', name: 'pokemon_index', methods:['get'])]
+    public function index(ManagerRegistry $registry): JsonResponse
     {
-        return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/PokemonController.php',
-        ]);
+        $pokemons = $registry->getRepository(Pokemon::class)->list();
+
+        if (!$pokemons) {
+            return new JsonResponse('Erro ao buscar pokemons', Response::HTTP_INTERNAL_SERVER_ERROR, []);
+        }
+
+        $jsonPokemon = $this->serializer->serialize($pokemons, 'json');
+        return new JsonResponse($jsonPokemon, Response::HTTP_OK, [], true);
     }
 
     #[Route('/pokemon/{id}', name: 'pokemon_show', methods:['get'])]
@@ -41,7 +45,7 @@ class PokemonController extends AbstractController
         $pokemon = $registry->getRepository(Pokemon::class)->findByIdAPI($id);
 
         if (!$pokemon) {
-            return $this->json('Pokemon não encontrado - id: ' . $id, 404);
+            return new JsonResponse('Pokemon não encontrado - id: ' . $id, Response::HTTP_NOT_FOUND, []);
         }
 
         $jsonPokemon = $this->serializer->serialize($pokemon, 'json');

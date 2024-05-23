@@ -27,8 +27,8 @@ class Pokemon
     #[ORM\Column(length: 255)]
     private ?string $img_large = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $types = null;
+    #[ORM\Column]
+    private array $types = [];
 
     #[ORM\Column]
     private array $weaknesses = [];
@@ -92,12 +92,12 @@ class Pokemon
         return $this;
     }
 
-    public function getTypes(): ?string
+    public function getTypes(): ?array
     {
         return $this->types;
     }
 
-    public function setTypes(string $types): static
+    public function setTypes(array $types): static
     {
         $this->types = $types;
 

@@ -24,4 +24,12 @@ class PokemonRepository extends ServiceEntityRepository
 
         return $pokemon;
     }
+
+    public function list($query = '')
+    {
+        $pokemonApi = new PokemonApi();
+        $pokemon = $pokemonApi->getPokemon($query);
+
+        return $pokemon;
+    }
 }
