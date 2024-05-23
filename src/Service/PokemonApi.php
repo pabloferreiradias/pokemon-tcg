@@ -23,6 +23,12 @@ class PokemonApi
 
                 return $pokemons;
             }
+
+            $response = PokemonService::Card()->where(['name' => $query])->pageSize(20)->all();
+            $pokemons = $this->createPokemonsArray($response);
+
+            return $pokemons;
+
         } catch (\Throwable $th) {
             return false;
         }

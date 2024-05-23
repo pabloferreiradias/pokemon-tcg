@@ -51,4 +51,17 @@ class PokemonController extends AbstractController
         $jsonPokemon = $this->serializer->serialize($pokemon, 'json');
         return new JsonResponse($jsonPokemon, Response::HTTP_OK, [], true);
     }
+
+    #[Route('/pokemon/search/{name}', name: 'pokemon_list', methods:['get'])]
+    public function search(ManagerRegistry $registry, string $name): JsonResponse
+    {
+        $pokemons = $registry->getRepository(Pokemon::class)->list($name);
+
+        if (!$pokemons) {
+            return new JsonResponse('Erro ao buscar pokemons', Response::HTTP_INTERNAL_SERVER_ERROR, []);
+        }
+
+        $jsonPokemon = $this->serializer->serialize($pokemons, 'json');
+        return new JsonResponse($jsonPokemon, Response::HTTP_OK, [], true);
+    }
 }
