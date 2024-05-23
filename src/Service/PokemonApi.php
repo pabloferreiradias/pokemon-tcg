@@ -46,7 +46,8 @@ class PokemonApi
         }
     }
 
-    private function createPokemonsArray($pokemonsResponse) {
+    private function createPokemonsArray($pokemonsResponse)
+    {
         $pokemonArray = [];
 
         foreach ($pokemonsResponse as $pokemonData) {
