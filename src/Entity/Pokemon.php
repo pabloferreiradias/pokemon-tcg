@@ -18,6 +18,9 @@ class Pokemon
     private ?string $name = null;
 
     #[ORM\Column(length: 255)]
+    private ?string $full_id = null;
+
+    #[ORM\Column(length: 255)]
     private ?string $img = null;
 
     #[ORM\Column(length: 255)]
@@ -45,6 +48,18 @@ class Pokemon
     public function setName(string $name): static
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getFullId(): ?string
+    {
+        return $this->full_id;
+    }
+
+    public function setFullId(string $full_id): static
+    {
+        $this->full_id = $full_id;
 
         return $this;
     }
