@@ -1,8 +1,9 @@
 <div{{attributes}} class="col-md-3 pb-3" id="{{ fullId }}">
-	<div class="card">
+	<div class="card cardSelect {{ types | first | lower }}">
 		<div class="image-container">
 			<div class="first">
-				<div class="d-flex justify-content-between align-items-center">
+				<div class="d-flex justify-content-between align-items-end">
+					<span class="pkm-id"></span>
 					<span class="pkm-id">{{ fullId }}</span>
 				</div>
 			</div>
@@ -17,7 +18,7 @@
 			<div class="d-flex justify-content-between align-items-center pt-1">
 				<div class="color-select d-flex ">
                     {% for type in types %}
-					    <span class="buy">{{ type }}</span>
+					    <span class="type">{{ type }}</span>
                     {% endfor %}
 				</div>
 
@@ -26,7 +27,7 @@
 
 			<div class="d-flex justify-content-between align-items-center pt-1">
 				<div></div>
-				<span class="buy"></span>
+				<span class="type"></span>
 			</div>
 		</div>
 	</div>
