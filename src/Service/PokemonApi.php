@@ -96,10 +96,15 @@ class PokemonApi
             }
         }
 
+        $types = $pokemonData->getTypes();
+        if (!$types) {
+            $types = [$pokemonData->getSupertype()];
+        }
+
         $pokemon = new Pokemon();
         $pokemon->setName($pokemonData->getName());
         $pokemon->setFullId($pokemonData->getId());
-        $pokemon->setTypes($pokemonData->getTypes());
+        $pokemon->setTypes($types);
         $pokemon->setImgSmall($pokemonData->getImages()->getSmall());
         $pokemon->setImgLarge($pokemonData->getImages()->getLarge());
         $pokemon->setWeaknesses($weaknessesArray);

@@ -19,4 +19,14 @@ class WebController extends AbstractController
             'pokemons' => $pokemons,
         ]);
     }
+
+    #[Route('/search/{query}', name: 'app_web')]
+    public function search(ManagerRegistry $registry, string $query): Response
+    {
+        $pokemons = $registry->getRepository(Pokemon::class)->list($query);
+
+        return $this->render('web/index.html.twig', [
+            'pokemons' => $pokemons,
+        ]);
+    }
 }
