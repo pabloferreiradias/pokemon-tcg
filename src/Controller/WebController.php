@@ -4,13 +4,14 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 use Doctrine\Persistence\ManagerRegistry;
 use App\Entity\Pokemon;
 
 class WebController extends AbstractController
 {
-    #[Route('/', name: 'app_web')]
+    #[Route('/', name: 'web_index')]
     public function index(ManagerRegistry $registry): Response
     {
         $pokemons = $registry->getRepository(Pokemon::class)->list();
@@ -20,13 +21,16 @@ class WebController extends AbstractController
         ]);
     }
 
-    #[Route('/search/{query}', name: 'app_web')]
-    public function search(ManagerRegistry $registry, string $query): Response
+    #[Route('/search', name: 'web_search')]
+    public function search(Request $request, ManagerRegistry $registry): Response
     {
+        $query = $request->query->get('query', '');
+
         $pokemons = $registry->getRepository(Pokemon::class)->list($query);
 
         return $this->render('web/index.html.twig', [
             'pokemons' => $pokemons,
+            'query' => $query
         ]);
     }
 }
