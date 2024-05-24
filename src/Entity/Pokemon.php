@@ -37,6 +37,9 @@ class Pokemon
     #[ORM\Column]
     private array $attacks = [];
 
+    #[ORM\Column]
+    private array $rules = [];
+
     public function getId(): ?int
     {
         return $this->id;
@@ -134,6 +137,18 @@ class Pokemon
     public function setAttacks(array $attacks): static
     {
         $this->attacks = $attacks;
+
+        return $this;
+    }
+
+    public function getRules(): array
+    {
+        return $this->rules;
+    }
+
+    public function setRules(array $rules): static
+    {
+        $this->rules = $rules;
 
         return $this;
     }

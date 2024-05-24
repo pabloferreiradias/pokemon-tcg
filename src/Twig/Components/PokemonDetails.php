@@ -14,4 +14,5 @@ final class PokemonDetails
     public array $weaknesses;
     public array $resistances;
     public array $attacks;
+    public array $rules;
 }

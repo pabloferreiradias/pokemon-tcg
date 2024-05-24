@@ -16,48 +16,58 @@
 						<li class="list-group-item">
 							<strong>Type</strong>
 							<span class="pull-right">
-                                {% for type in types %}
-                                    <span class="label type type-{{ type | lower }}">
-                                        {{ type }}
-                                    </span>
-                                    <img src=" {{ asset('img/types/' ~ type | lower ~ '.png') }}">
-                                {% endfor %}
+								{% for type in types %}
+									<span class="label type type-{{ type | lower }}">
+										{{ type }}
+									</span>
+									<img src=" {{ asset('img/types/' ~ type | lower ~ '.png') }}">
+								{% endfor %}
 							</span>
 						</li>
-                        <li class="list-group-item">
+						{% if types | first != "Trainer" %}
+						<li class="list-group-item">
 							<strong>Weaknesses</strong>
 							<span class="pull-right">
-                                {% for weakness in weaknesses %}
-                                    <span class="label type type-{{ weakness.type | lower }}">
-                                        {{ weakness.type }} <img src=" {{ asset('img/types/' ~ weakness.type | lower ~ '.png') }}"> {{ weakness.value }}
-                                    </span>
-                                {% endfor %}
+								{% for weakness in weaknesses %}
+									<span class="label type type-{{ weakness.type | lower }}">
+										{{ weakness.type }}
+										<img src=" {{ asset('img/types/' ~ weakness.type | lower ~ '.png') }}">
+										{{ weakness.value }}
+									</span>
+								{% endfor %}
 							</span>
 						</li>
-                        <li class="list-group-item">
+						<li class="list-group-item">
 							<strong>Resistances</strong>
 							<span class="pull-right">
-                                {% for resistance in resistances %}
-                                    <span class="label type type-{{ resistance.type | lower }}">
-                                        {{ resistance.type }} <img src=" {{ asset('img/types/' ~ resistance.type | lower ~ '.png') }}"> {{ resistance.value }}
-                                    </span>
-                                {% endfor %}
+								{% for resistance in resistances %}
+									<span class="label type type-{{ resistance.type | lower }}">
+										{{ resistance.type }}
+										<img src=" {{ asset('img/types/' ~ resistance.type | lower ~ '.png') }}">
+										{{ resistance.value }}
+									</span>
+								{% endfor %}
 							</span>
 						</li>
-                        <li class="list-group-item">
-							<strong>Attacks</strong>
-                            <div class="pt-1">
-							{% for attack in attacks %}
-                            <twig:AttackItemList
-                                name="{{ attack.name }}"
-                                cost="{{ attack.cost }}"
-                                convertedEnergyCost="{{ attack.convertedEnergyCost }}"
-                                damage="{{ attack.damage }}"
-                                text="{{ attack.text }}"
-                            />
-                            {% endfor %}
-                            </div>
-						</li>
+						{% endif %}
+						{% if attacks %}
+							<li class="list-group-item">
+								<strong>Attacks</strong>
+								<div class="pt-1">
+									{% for attack in attacks %}
+										<twig:AttackItemList name="{{ attack.name }}" cost="{{ attack.cost }}" convertedenergycost="{{ attack.convertedEnergyCost }}" damage="{{ attack.damage }}" text="{{ attack.text }}"/>
+									{% endfor %}
+								</div>
+							</li>
+						{% endif %}
+						{% if rules %}
+							<li class="list-group-item">
+								<strong>Rules</strong>
+									{% for rule in rules %}
+										<p>{{ rule }}</p>
+									{% endfor %}
+							</li>
+						{% endif %}
 					</ul>
 				</div>
 			</div>

@@ -62,6 +62,7 @@ class PokemonApi
         $weaknessesArray = [];
         $resistancesArray = [];
         $attacksArray = [];
+        $rulesArray = [];
         
         $weaknesses = $pokemonData->getWeaknesses();
         if ($weaknesses) {
@@ -96,12 +97,18 @@ class PokemonApi
             }
         }
 
+        $pokemon = new Pokemon();
+
         $types = $pokemonData->getTypes();
         if (!$types) {
-            $types = [$pokemonData->getSupertype()];
+            $types = ['Trainer'];
         }
 
-        $pokemon = new Pokemon();
+        $rules = $pokemonData->getRules();
+        if ($rules) {
+            $rulesArray = $rules;
+        }
+
         $pokemon->setName($pokemonData->getName());
         $pokemon->setFullId($pokemonData->getId());
         $pokemon->setTypes($types);
@@ -110,6 +117,7 @@ class PokemonApi
         $pokemon->setWeaknesses($weaknessesArray);
         $pokemon->setResistances($resistancesArray);
         $pokemon->setAttacks($attacksArray);
+        $pokemon->setRules($rulesArray);
 
         return $pokemon;
     }
