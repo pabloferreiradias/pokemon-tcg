@@ -18,6 +18,7 @@ class WebController extends AbstractController
 
         return $this->render('web/index.html.twig', [
             'pokemons' => $pokemons,
+            'query' => ''
         ]);
     }
 
@@ -34,13 +35,14 @@ class WebController extends AbstractController
         ]);
     }
 
-    #[Route('/pokemon/{id}', name: 'web_show', methods:['get'])]
-    public function show(ManagerRegistry $registry, string $id = '') : Response
+    #[Route('/pokemon', name: 'web_show', methods:['get'])]
+    public function show(Request $request, ManagerRegistry $registry) : Response
     {
         $pokemon = null;
+        $query = $request->query->get('query', '');
 
-        if ($id) {
-            $pokemon = $registry->getRepository(Pokemon::class)->findByIdAPI($id);
+        if ($query) {
+            $pokemon = $registry->getRepository(Pokemon::class)->findByIdAPI($query);
         }
 
         return $this->render('web/view.html.twig', [

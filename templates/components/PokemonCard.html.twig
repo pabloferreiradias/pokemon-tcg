@@ -1,4 +1,4 @@
-<div{{attributes}} class="col-md-3 pb-3" id="{{ fullId }}">
+<div{{attributes}} class="col-md-3 pb-3" id="{{ fullId }}" onclick="location.href=&quot;{{ path('web_show', {"query" : fullId}) }}&quot;;">
 	<div class="card cardSelect {{ types | first | lower }}">
 		<div class="image-container">
 			<div class="first">
