@@ -1,0 +1,12 @@
+<div>
+    {% for item in cost %}
+        <img src=" {{ asset('img/types/' ~ item | lower ~ '.png') }}">
+    {% endfor %}
+	<span>{{ name }}</span>
+    <span class="label type pull-right">
+        {{ damage }}
+    </span>
+</div>
+<div>
+	<p>{{ text }}</p>
+</div>
