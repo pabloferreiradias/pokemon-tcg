@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Pokemon TCG
+{% endblock %}
+
+{% block body %}
+
+	<div class="container mt-5">
+
+		<div class="row">
+
+{% for pokemon in pokemons %}
+			<twig:PokemonCard
+                    fullId="{{ pokemon.fullId }}"
+                    name="{{ pokemon.name }}"
+                    imgSmall="{{ pokemon.imgSmall }}"
+                    types="{{ pokemon.types }}"
+            />
+{% endfor %}
+		</div>
+	</div>
+{% endblock %}

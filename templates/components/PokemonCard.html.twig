@@ -1,0 +1,33 @@
+<div{{attributes}} class="col-md-3 pb-3" id="{{ fullId }}">
+	<div class="card">
+		<div class="image-container">
+			<div class="first">
+				<div class="d-flex justify-content-between align-items-center">
+					<span class="pkm-id">{{ fullId }}</span>
+				</div>
+			</div>
+			<img src="{{ imgSmall }}" class="img-fluid rounded thumbnail-image">
+		</div>
+		<div class="product-detail-container p-2">
+			<div class="d-flex justify-content-between align-items-center">
+				<h5 class="pokemon-name">{{ name }}</h5>
+				<div class="d-flex flex-column mb-2"></div>
+			</div>
+
+			<div class="d-flex justify-content-between align-items-center pt-1">
+				<div class="color-select d-flex ">
+                    {% for type in types %}
+					    <span class="buy">{{ type }}</span>
+                    {% endfor %}
+				</div>
+
+				<div class="d-flex "></div>
+			</div>
+
+			<div class="d-flex justify-content-between align-items-center pt-1">
+				<div></div>
+				<span class="buy"></span>
+			</div>
+		</div>
+	</div>
+</div>
