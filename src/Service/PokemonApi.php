@@ -18,13 +18,13 @@ class PokemonApi
     {
         try {
             if (empty($query)) {
-                $response = PokemonService::Card()->pageSize(20)->all();
+                $response = PokemonService::Card()->pageSize(52)->all();
                 $pokemons = $this->createPokemonsArray($response);
 
                 return $pokemons;
             }
 
-            $response = PokemonService::Card()->where(['name' => $query])->pageSize(20)->all();
+            $response = PokemonService::Card()->where(['name' => $query])->pageSize(52)->all();
             $pokemons = $this->createPokemonsArray($response);
 
             return $pokemons;
